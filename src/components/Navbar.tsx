@@ -1,13 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react"; // Importando ícones para o menu
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const links = [
     { href: "#hero", label: "Início" },
     { href: "#features", label: "Recursos" },
-    { href: "#showcase", label: "Telas" }, // Novo link adicionado aqui
+    { href: "#showcase", label: "Telas" },
     { href: "#modules", label: "Módulos" },
     { href: "#pricing", label: "Planos" },
     { href: "#roadmap", label: "Roadmap" },
@@ -15,7 +19,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-xl shadow-sm z-50 border-b border-slate-200/50">
+    <header className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-xl shadow-sm z-50 border-b border-slate-200/50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         
         {/* Logo */}
@@ -37,7 +41,7 @@ export default function Navbar() {
           </span>
         </motion.div>
 
-        {/* Links - Desktop */}
+        {/* Links - Desktop (Escondido no Mobile) */}
         <nav className="hidden md:flex gap-8 text-slate-600 font-semibold text-sm uppercase tracking-wide">
           {links.map((item) => (
             <a
@@ -51,17 +55,61 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA */}
-        <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          href="https://wa.me/5521991724036"
-          target="_blank"
-          className="bg-brand text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-brand-dark transition-all shadow-md shadow-brand/20"
-        >
-          CONTRATAR AGORA
-        </motion.a>
+        {/* Botões - Desktop (Escondido no Mobile) */}
+        <div className="hidden md:block">
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="https://wa.me/5521991724036"
+            target="_blank"
+            className="bg-brand text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-brand-dark transition-all shadow-md shadow-brand/20"
+          >
+            CONTRATAR AGORA
+          </motion.a>
+        </div>
+
+        {/* Botão Hambúrguer - Mobile (Visível apenas no Celular) */}
+        <div className="md:hidden flex items-center">
+          <button 
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-slate-900 p-2"
+          >
+            {isOpen ? <X size={32} /> : <Menu size={32} />}
+          </button>
+        </div>
       </div>
+
+      {/* Menu Mobile - Dropdown com Animação */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-b border-slate-200 overflow-hidden"
+          >
+            <div className="flex flex-col p-6 gap-6">
+              {links.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)} // Fecha o menu ao clicar
+                  className="text-slate-700 font-bold text-lg hover:text-brand transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href="https://wa.me/5521991724036"
+                target="_blank"
+                className="bg-brand text-white text-center py-4 rounded-xl font-bold shadow-lg"
+              >
+                CONTRATAR AGORA
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

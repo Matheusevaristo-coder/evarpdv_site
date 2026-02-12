@@ -1,13 +1,51 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, Mail } from "lucide-react";
+import { Mail } from "lucide-react"; // Removido Globe pois usaremos o Logo
 import { FaWhatsapp } from "react-icons/fa";
+import Image from "next/image"; // Importação necessária
 
 export default function Contact() {
   const WHATSAPP_NUMBER = "5521991724036";
   const message = "Olá! Gostaria de solicitar uma demonstração do EvarPDV.";
   const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  const contactItems = [
+    {
+      icon: <FaWhatsapp size={32} />,
+      title: "WhatsApp",
+      value: "(21) 99172-4036",
+      link: waLink,
+      color: "text-brand",
+      bgColor: "bg-green-50",
+    },
+    {
+      // Substituindo o ícone de Globo pela Logo2.png
+      icon: (
+        <div className="relative w-12 h-12">
+          <Image 
+            src="/Logo2.png" 
+            alt="Evaristo Solutions" 
+            fill 
+            className="object-contain"
+          />
+        </div>
+      ),
+      title: "Website",
+      value: "evaristo-solutions.vercel.app",
+      link: "https://evaristo-solutions.vercel.app",
+      color: "group-hover:opacity-80", // Efeito de opacidade no hover
+      bgColor: "bg-slate-50 shadow-inner",
+    },
+    {
+      icon: <Mail size={28} />,
+      title: "E-mail",
+      value: "matheusevaristo_ti@hotmail.com",
+      link: "mailto:matheusevaristo_ti@hotmail.com",
+      color: "text-rose-600",
+      bgColor: "bg-rose-50",
+    },
+  ];
 
   return (
     <section id="contact" className="w-full py-32 bg-white border-t border-slate-100">
@@ -31,32 +69,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 mt-24">
-          {[
-            {
-              icon: <FaWhatsapp size={32} />,
-              title: "WhatsApp",
-              value: "(21) 99172-4036",
-              link: waLink,
-              color: "text-brand",
-              bgColor: "bg-green-50",
-            },
-            {
-              icon: <Globe size={28} />,
-              title: "Website",
-              value: "evaristo-solutions.vercel.app",
-              link: "https://evaristo-solutions.vercel.app",
-              color: "text-sky-600",
-              bgColor: "bg-sky-50",
-            },
-            {
-              icon: <Mail size={28} />,
-              title: "E-mail",
-              value: "matheusevaristo_ti@hotmail.com",
-              link: "mailto:matheusevaristo_ti@hotmail.com",
-              color: "text-rose-600",
-              bgColor: "bg-rose-50",
-            },
-          ].map((item, i) => (
+          {contactItems.map((item, i) => (
             <motion.a
               key={i}
               href={item.link}
@@ -65,7 +78,7 @@ export default function Contact() {
               whileHover={{ scale: 1.05, y: -8 }}
               className="flex flex-col items-center group p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 transition-all duration-300 hover:bg-white hover:shadow-2xl hover:border-brand/20"
             >
-              <div className={`w-20 h-20 ${item.bgColor} ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner`}>
+              <div className={`w-20 h-20 ${item.bgColor} ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner overflow-hidden p-2`}>
                 {item.icon}
               </div>
 
