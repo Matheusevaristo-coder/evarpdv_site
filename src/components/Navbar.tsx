@@ -7,6 +7,7 @@ export default function Navbar() {
   const links = [
     { href: "#hero", label: "Início" },
     { href: "#features", label: "Recursos" },
+    { href: "#showcase", label: "Telas" }, // Novo link adicionado aqui
     { href: "#modules", label: "Módulos" },
     { href: "#pricing", label: "Planos" },
     { href: "#roadmap", label: "Roadmap" },
@@ -17,7 +18,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-xl shadow-sm z-50 border-b border-slate-200/50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         
-        {/* Logo - Com animação sutil ao carregar */}
+        {/* Logo */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -36,7 +37,7 @@ export default function Navbar() {
           </span>
         </motion.div>
 
-        {/* Links - Desktop (Trocado blue-600 por brand) */}
+        {/* Links - Desktop */}
         <nav className="hidden md:flex gap-8 text-slate-600 font-semibold text-sm uppercase tracking-wide">
           {links.map((item) => (
             <a
@@ -50,7 +51,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA - WhatsApp com sua cor Brand */}
+        {/* CTA */}
         <motion.a
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
