@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* Registrando sua identidade visual */
+  --color-brand: #16a34a;
+  --color-brand-dark: #15803d;
+  --color-brand-light: #86efac;
+  
+  /* Garantindo que o Slate seja o do Next.js moderno */
+  --color-slate-950: #020617;
+  --color-slate-900: #0f172a;
+}
+
+:root {
+  --brand: #16a34a;
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
+/* Reset básico para evitar o 'branco doido' de fundo */
+body {
+  @apply bg-slate-950 text-white;
+}
