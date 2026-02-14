@@ -3,7 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react"; // Importando ícones para o menu
+import { Menu, X } from "lucide-react";
+
+// 1. IMPORTANTE: Importe a imagem aqui
+// Certifique-se de mover a imagem para a pasta correta (ex: src/assets)
+import logoImg from "@/assets/Logo2.png"; 
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,11 +33,15 @@ export default function Navbar() {
           className="flex items-center gap-3"
         >
           <div className="relative w-10 h-10">
+            {/* 2. Alteração aqui: Usando a variável importada */}
             <Image
-              src="/Logo2.png"
+              src={logoImg} 
               alt="EvarPDV Logo"
               fill
               className="rounded-lg object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Ajuda na performance
+              priority // Como é o logo e está no topo, carregamos com prioridade
+              placeholder="blur" // Cria um efeito de carregamento bonito e leve automático
             />
           </div>
           <span className="font-black text-2xl tracking-tighter text-slate-900">
@@ -41,7 +49,8 @@ export default function Navbar() {
           </span>
         </motion.div>
 
-        {/* Links - Desktop (Escondido no Mobile) */}
+        {/* ... Resto do código permanece igual ... */}
+        
         <nav className="hidden md:flex gap-8 text-slate-600 font-semibold text-sm uppercase tracking-wide">
           {links.map((item) => (
             <a
@@ -55,7 +64,6 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Botões - Desktop (Escondido no Mobile) */}
         <div className="hidden md:block">
           <motion.a
             whileHover={{ scale: 1.05 }}
@@ -68,7 +76,6 @@ export default function Navbar() {
           </motion.a>
         </div>
 
-        {/* Botão Hambúrguer - Mobile (Visível apenas no Celular) */}
         <div className="md:hidden flex items-center">
           <button 
             onClick={() => setIsOpen(!isOpen)}
@@ -79,7 +86,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Menu Mobile - Dropdown com Animação */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -93,7 +99,7 @@ export default function Navbar() {
                 <a
                   key={item.href}
                   href={item.href}
-                  onClick={() => setIsOpen(false)} // Fecha o menu ao clicar
+                  onClick={() => setIsOpen(false)}
                   className="text-slate-700 font-bold text-lg hover:text-brand transition-colors"
                 >
                   {item.label}

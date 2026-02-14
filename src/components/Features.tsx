@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { Bolt, ShieldCheck, Monitor } from "lucide-react";
 import Image from "next/image";
 
+// Importação Estática (Garanta que a imagem esteja em src/assets)
+import evarPdvImg from "@/assets/EvarPDV.png"; 
+
 export default function Features() {
   const featureList = [
     {
@@ -82,18 +85,20 @@ export default function Features() {
             {/* Efeito de brilho atrás da imagem */}
             <div className="absolute -inset-4 bg-brand/10 blur-3xl rounded-full opacity-50" />
             
-            <div className="relative p-2 bg-slate-200 rounded-[2.5rem] shadow-2xl border border-white">
+            {/* CORREÇÃO APLICADA NA DIV PAI TAMBÉM (Opcional, mas recomendado) */}
+            <div className="relative p-2 bg-slate-200 rounded-4xl shadow-2xl border border-white">
               <Image
-                src="/EvarPDV.png"
+                src={evarPdvImg}
                 alt="Interface do sistema EvarPDV"
-                width={800}
-                height={600}
-                className="rounded-[2rem] object-cover"
-                priority
+                sizes="(max-width: 768px) 100vw, 50vw" 
+                placeholder="blur"
+                // CORREÇÃO AQUI: rounded-[2rem] -> rounded-4xl
+                className="rounded-4xl object-cover"
+                priority 
               />
             </div>
 
-            {/* Floating Badge (Opcional - dá um toque extra de SaaS) */}
+            {/* Floating Badge */}
             <motion.div 
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

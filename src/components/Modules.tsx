@@ -52,8 +52,9 @@ export default function Modules() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }} // Efeito de levantamento ao passar o mouse
-              className="group bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-brand/30"
+              whileHover={{ y: -10 }} 
+              // CORREÇÃO: rounded-[2rem] -> rounded-4xl
+              className="group bg-white p-8 rounded-4xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-brand/30"
             >
               <div className="w-16 h-16 bg-slate-50 text-brand rounded-2xl mb-6 flex items-center justify-center group-hover:bg-brand group-hover:text-white transition-colors duration-300 shadow-inner">
                 {item.icon}

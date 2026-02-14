@@ -6,20 +6,23 @@ export default function Hero() {
   return (
     <section id="hero" className="relative w-full h-screen flex items-center justify-center bg-slate-950 text-white overflow-hidden">
       
-      {/* Background Glows Animados - Dão profundidade ao site */}
+      {/* Background Glows Animados */}
       <motion.div 
         animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.3, 0.2] }}
         transition={{ duration: 8, repeat: Infinity }}
-        className="absolute w-[600px] h-[600px] bg-brand opacity-20 blur-[120px] rounded-full -top-24 -left-24" 
+        // CORREÇÃO: w-[600px] -> w-150 | h-[600px] -> h-150
+        // (150 * 4 = 600px) - Classe nativa do Tailwind
+        className="absolute w-150 h-150 bg-brand opacity-20 blur-[120px] rounded-full -top-24 -left-24" 
       />
       <motion.div 
         animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
         transition={{ duration: 10, repeat: Infinity, delay: 1 }}
-        className="absolute w-[500px] h-[500px] bg-sky-500 opacity-20 blur-[120px] rounded-full -bottom-24 -right-24" 
+        // CORREÇÃO: w-[500px] -> w-125 | h-[500px] -> h-125
+        // (125 * 4 = 500px)
+        className="absolute w-125 h-125 bg-sky-500 opacity-20 blur-[120px] rounded-full -bottom-24 -right-24" 
       />
 
       <div className="z-10 text-center px-6 max-w-4xl">
-        {/* Título - Removido pt-32 para centralizar melhor */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -61,7 +64,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Indicador de Scroll (Opcional) */}
+      {/* Indicador de Scroll */}
       <motion.div 
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}

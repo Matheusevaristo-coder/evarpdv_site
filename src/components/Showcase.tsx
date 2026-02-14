@@ -3,22 +3,27 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+// Seus imports de imagem (Mantenha como fizemos no passo anterior)
+import printPDV from "@/assets/pontodevenda.png";
+import printDash from "@/assets/dashboard.png";
+import printProd from "@/assets/cadastroproduto.png";
+
 export default function Showcase() {
   const screenshots = [
     {
       title: "Ponto de Venda",
       desc: "Interface intuitiva para vendas rápidas e seguras.",
-      src: "/pontodevenda.png",
+      src: printPDV,
     },
     {
       title: "Dashboard de Gestão",
       desc: "Gráficos detalhados sobre o desempenho do seu negócio.",
-      src: "/dashboard.png",
+      src: printDash,
     },
     {
       title: "Cadastro de Produtos",
       desc: "Controle total do seu estoque de forma simples.",
-      src: "/cadastroproduto.png",
+      src: printProd,
     },
   ];
 
@@ -53,22 +58,27 @@ export default function Showcase() {
               viewport={{ once: true }}
               className="group relative"
             >
-              <div className="relative h-[300px] w-full rounded-[2rem] overflow-hidden border border-slate-200 shadow-lg group-hover:shadow-2xl transition-all duration-500">
+              {/* CORREÇÕES APLICADAS AQUI: */}
+              {/* 1. h-75 em vez de h-[300px] */}
+              {/* 2. rounded-4xl em vez de rounded-[2rem] */}
+              <div className="relative h-75 w-full rounded-4xl overflow-hidden border border-slate-200 shadow-lg group-hover:shadow-2xl transition-all duration-500 bg-slate-200">
                 <Image
                   src={screen.src}
                   alt={screen.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  placeholder="blur"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 
-                {/* Overlay de informações no hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                {/* CORREÇÃO APLICADA AQUI: */}
+                {/* 3. bg-linear-to-t em vez de bg-gradient-to-t (Sintaxe do Tailwind v4) */}
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                   <h4 className="text-white font-bold text-2xl">{screen.title}</h4>
                   <p className="text-slate-200 mt-2 text-sm">{screen.desc}</p>
                 </div>
               </div>
               
-              {/* Legenda visível no Mobile */}
               <div className="mt-6 md:hidden">
                 <h4 className="font-bold text-xl text-slate-900">{screen.title}</h4>
                 <p className="text-slate-500 text-sm mt-1">{screen.desc}</p>
